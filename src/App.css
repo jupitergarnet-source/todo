@@ -1,0 +1,353 @@
+/* ===== App layout ===== */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px 32px;
+  background: linear-gradient(160deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI',
+    'Meiryo UI', sans-serif;
+}
+
+/* ===== Header ===== */
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.app-title {
+  font-size: 72px;
+  font-weight: 100;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  line-height: 1;
+  margin: 0;
+}
+
+.app-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  margin-top: 8px;
+  letter-spacing: 0.05em;
+}
+
+/* ===== Card ===== */
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 20px 60px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* ===== Input row ===== */
+.input-row {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 8px;
+  background: #fafafa;
+}
+
+.toggle-all-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.toggle-all-btn:hover,
+.toggle-all-btn.all-completed {
+  color: #764ba2;
+}
+
+.toggle-all-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.todo-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  background: transparent;
+  font-family: inherit;
+  caret-color: #764ba2;
+}
+
+.todo-input::placeholder {
+  color: #c0c0c0;
+}
+
+/* ===== Todo list ===== */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f5f5f5;
+  gap: 12px;
+  transition: background 0.15s;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item:hover {
+  background: #fafafa;
+}
+
+.todo-item:hover .delete-btn {
+  opacity: 1;
+}
+
+/* ===== Custom checkbox ===== */
+.check-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.check-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  background: #fff;
+  position: relative;
+}
+
+.checkmark::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 10px;
+  border: 2.5px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translate(-1px, -1px);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.check-input:checked + .checkmark {
+  background: #764ba2;
+  border-color: #764ba2;
+}
+
+.check-input:checked + .checkmark::after {
+  opacity: 1;
+}
+
+.check-label:hover .checkmark {
+  border-color: #764ba2;
+}
+
+/* ===== Todo text ===== */
+.todo-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  word-break: break-word;
+  line-height: 1.5;
+  transition: color 0.2s;
+  user-select: none;
+}
+
+.todo-item.completed .todo-text {
+  color: #bbb;
+  text-decoration: line-through;
+}
+
+/* ===== Delete button ===== */
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #e74c3c;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  transform: scale(1.15);
+  background: rgba(231, 76, 60, 0.08);
+}
+
+/* ===== Edit mode ===== */
+.todo-item.editing {
+  padding: 10px 20px;
+}
+
+.edit-input {
+  flex: 1;
+  border: 2px solid #764ba2;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  color: #333;
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.15);
+}
+
+/* ===== Empty states ===== */
+.list-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: #ccc;
+  font-size: 15px;
+  list-style: none;
+}
+
+.empty-state {
+  padding: 64px 20px 52px;
+  text-align: center;
+  color: #ccc;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.empty-state p {
+  font-size: 15px;
+}
+
+/* ===== Footer ===== */
+.card-footer {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background: #fafafa;
+  border-top: 1px solid #f0f0f0;
+  gap: 12px;
+  flex-wrap: wrap;
+  min-height: 52px;
+}
+
+.item-count {
+  font-size: 13px;
+  color: #999;
+  flex: 1;
+  min-width: 100px;
+}
+
+.filter-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.filter-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #777;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.filter-btn:hover {
+  border-color: #ddd;
+  color: #555;
+}
+
+.filter-btn.active {
+  border-color: #764ba2;
+  color: #764ba2;
+  font-weight: 600;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #bbb;
+  cursor: pointer;
+  transition: color 0.15s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.clear-btn:hover {
+  color: #e74c3c;
+}
+
+/* ===== Hint ===== */
+.hint {
+  margin-top: 20px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .app {
+    padding: 32px 12px 24px;
+  }
+
+  .app-title {
+    font-size: 56px;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .filter-nav {
+    justify-content: center;
+  }
+
+  .clear-btn {
+    text-align: center;
+  }
+}
